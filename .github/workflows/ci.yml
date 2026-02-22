@@ -1,0 +1,22 @@
+name: CI with Cache
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: prime-cache-c302661
+      id: cache-step
+      uses: actions/cache@v4
+      with:
+        key: cache-c302661
+        path: ~/.cache
+    
+    - name: Show cache result
+      run: |
+        echo "Cache hit: ${{ steps.cache-step.outputs.cache-hit }}"
